@@ -53,10 +53,10 @@ const userSchema = new mongoose.Schema(
 //pre hook is used to preform action just before saving data in db
 //here do not use arrow fn bcoz we need reference of parent i.e. userSchema
 //next bcoz it is middleware
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();  
+userSchema.pre("save", async function () {
+  if (!this.isModified("password")) return ;  
   this.password = await bcrypt.hash(this.password, 10); //here 10 round of salting is done
-  next();
+  ;
 });
 
 //custom method to check the password
